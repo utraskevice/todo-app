@@ -1,0 +1,45 @@
+POST http://localhost:8000/signup
+Content-Type: application/json
+
+{
+    "name_surname": "Vienas Antras",
+    "email": "vienas@gmail.com",
+    "password": "password"
+}
+
+### 
+POST http://localhost:8000/login
+Content-Type: application/json
+
+{
+    "email": "v23nas@gmail.com",
+    "password": "password"
+}
+
+###
+GET http://localhost:8000/users/63d8142db6da43a56c00bdc2
+
+###
+POST http://localhost:8000/todo
+Content-Type: application/json
+
+{
+    "userId": "63d8142db6da43a56c00bdc2",
+    "todo_name": "Go to work",
+    "status": "To do",
+    "is_favorite": false
+}
+
+###
+GET http://localhost:8000/todo/63d8142db6da43a56c00bdc2
+
+###
+PUT http://localhost:8000/todo/63d817f7f8779d71b23649c1
+Content-Type: application/json
+
+{
+    "is_favorite": true
+}
+
+###
+DELETE http://localhost:8000/todo/63da591c2658261c454b81ca
