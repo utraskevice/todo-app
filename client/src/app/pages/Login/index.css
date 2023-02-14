@@ -1,0 +1,26 @@
+.Login {
+  padding: 48px 0 68px;
+}
+
+.Login__form {
+  width: 50%;
+  display: inline-flex;
+  flex-direction: column;
+  padding: 60px 60px 18px;
+  margin: 0 auto;
+  align-items: center;
+  font-size: 20px;
+  line-height: 2;
+  font-weight: 500;
+}
+
+.Login__error > .Button {
+  margin-top: 20px;
+}
+
+.Login__error {
+  margin-top: 50px;
+  color: var(--light-blue);
+  font-size: 23px;
+  text-shadow: 0.5px 0.5px var(--light);
+}

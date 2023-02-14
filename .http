@@ -1,10 +1,12 @@
+###
 POST http://localhost:8000/signup
 Content-Type: application/json
 
 {
-    "name_surname": "Vienas Antras",
-    "email": "vienas@gmail.com",
-    "password": "password"
+    "name_surname": "Jhon Smith",
+    "email": "jhonas@gmail.com",
+    "password": "password",
+    "confirmPassword": "password"
 }
 
 ### 
@@ -24,22 +26,23 @@ POST http://localhost:8000/todo
 Content-Type: application/json
 
 {
-    "userId": "63d8142db6da43a56c00bdc2",
-    "todo_name": "Go to work",
-    "status": "To do",
-    "is_favorite": false
+    "userId": "63dd0abbd5c1dd00527e8690",
+    "todo_name": "Go shopping"
 }
 
 ###
-GET http://localhost:8000/todo/63d8142db6da43a56c00bdc2
+GET http://localhost:8000/todo/63dd0abbd5c1dd00527e8690
 
 ###
-PUT http://localhost:8000/todo/63d817f7f8779d71b23649c1
+PUT http://localhost:8000/todo/63ea482a89032acd77abe59a
 Content-Type: application/json
 
 {
-    "is_favorite": true
+    "isFavorite": true
 }
+
+###
+PUT http://localhost:8000/favorite/63eb52ee3abb1effe83e9053
 
 ###
 DELETE http://localhost:8000/todo/63da591c2658261c454b81ca

@@ -1,0 +1,41 @@
+.AccountPage {
+  margin-top: 30px;
+}
+
+.AddForm {
+  width: 90%;
+  max-width: 850px;
+  margin: auto;
+  position: relative;
+}
+
+.TodoBoard {
+  display: flex;
+  margin: 30px 0px;
+  gap: 20px;
+  /* justify-content: flex-start; */
+  justify-content: center;
+}
+
+.TodoBoard > * {
+  /* width: 32%; */
+  width: 90%;
+
+  border: 2px solid var(--light);
+  border-radius: 10px;
+  box-shadow: 0 4px 5px var(--blue);
+}
+
+.TodoBoard h1 {
+  color: var(--light);
+  text-align: center;
+  text-transform: uppercase;
+  margin: 20px 10px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.Error {
+  font-size: 20px;
+  margin-top: 20px;
+}

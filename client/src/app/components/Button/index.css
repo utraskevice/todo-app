@@ -1,0 +1,57 @@
+.Button {
+  font-weight: 700;
+  background-color: var(--light-blue);
+  padding: 12px 34px;
+  margin: 15px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 4px var(--dark);
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.Button:hover {
+  cursor: pointer;
+  background: var(--dark);
+  border: 1px solid var(--light);
+}
+
+.Button:disabled {
+  background: var(--gray);
+  color: var(--white);
+  cursor: not-allowed;
+}
+
+.Button--small {
+  position: absolute;
+  right: -17px;
+  top: -15px;
+  width: 68px;
+  height: 68px;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+}
+
+.Button--icons {
+  width: 15px;
+  height: 15px;
+  padding: 0px;
+  margin: 6px;
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.Button--home {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 45px;
+}
+
+.Button--icons:hover {
+  background: none;
+}

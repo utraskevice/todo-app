@@ -1,0 +1,26 @@
+.Home {
+  position: relative;
+  overflow-x: scroll;
+}
+
+.Home_background {
+  max-width: 100%;
+  height: auto;
+  filter: opacity(60%);
+}
+
+.Home_title {
+  position: absolute;
+  top: 35%;
+  left: 53%;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-shadow: 2px 2px var(--dark);
+  transform: translate(-35%, -50%);
+}
+
+.Home_title span {
+  color: var(--blue);
+  text-shadow: 3px 3px var(--light);
+}

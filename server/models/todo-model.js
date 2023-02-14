@@ -9,7 +9,7 @@ const todoSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  is_favorite: {
+  isFavorite: {
     type: Boolean,
     default: false,
     required: true,

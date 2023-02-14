@@ -1,5 +1,6 @@
 const Todo = require('../models/todo-model.js');
 const User = require('../models/user-model.js');
+const serverErrorHandler = '../utills/error.js';
 
 const signupUser = async (req, res) => {
   const newUserData = req.body;
@@ -7,20 +8,25 @@ const signupUser = async (req, res) => {
   try {
     const isUserExist = await User.findOne({ email: newUserData.email });
 
-    if (!isUserExist) {
+    if (!isUserExist && newUserData.password === newUserData.confirmPassword) {
       const newUser = new User(newUserData);
 
       const createdUser = await newUser.save();
 
-      res.json({
+      res.status(201).json({
         message: 'User created',
         user: createdUser,
       });
     } else {
-      res.json({ message: 'Sorry, user with given email already exists' });
+      res.status(401).json({
+        message:
+          'Sorry, information yu are givin is not correct or user is allready exist',
+      });
     }
   } catch (error) {
-    console.log(error);
+    serverErrorHandler(error, res, 500, {
+      message: 'Can not sign up, try again later',
+    });
   }
 };
 
@@ -31,12 +37,14 @@ const loginUser = async (req, res) => {
     const user = await User.findOne(userData);
 
     if (user) {
-      res.json({ message: 'User founded', user });
+      res.status(200).json({ user, message: 'Logged in successfully' });
     } else {
-      res.json({ message: 'User with given email or password not found' });
+      res.status(401).json({ message: 'Invalid email or password' });
     }
   } catch (error) {
-    console.log(error);
+    serverErrorHandler(error, res, 500, {
+      message: 'Can not login, try again later',
+    });
   }
 };
 

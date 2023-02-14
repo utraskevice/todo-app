@@ -1,0 +1,16 @@
+.SingleTask {
+  list-style: none;
+  min-height: 55px;
+  width: 90%;
+  background: #1e5f74;
+  color: #fcdab7;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 5px #2c5e8a;
+  box-sizing: border-box;
+  cursor: move;
+}

@@ -1,0 +1,34 @@
+.Signup {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.Signup__form {
+  width: 60%;
+  display: inline-flex;
+  flex-direction: column;
+  padding: 20px 20px 18px;
+  margin: 0 auto;
+  align-items: center;
+  line-height: 2;
+}
+
+.Signup__error > .Button {
+  margin-top: 20px;
+}
+
+.Signup__error {
+  margin-top: 10px;
+  color: var(--light-blue);
+  text-shadow: 0.5px 0.5px var(--light);
+  font-size: 23px;
+}
+
+.Signup__login {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+hr {
+  border: solid var(--light);
+}

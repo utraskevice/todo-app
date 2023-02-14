@@ -1,0 +1,19 @@
+.Input {
+  width: 100%;
+  /* max-width: 850px; */
+  margin: auto;
+  position: relative;
+  height: 68px;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  background: var(--blue);
+  color: var(--light);
+  font-size: 16px;
+  text-indent: 40px;
+}
+
+.Input::placeholder {
+  color: var(--light);
+  opacity: 0.6;
+}

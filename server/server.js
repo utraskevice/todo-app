@@ -26,6 +26,7 @@ const {
   getTodo,
   updateTodo,
   deleteTodo,
+  toggleFavorite,
 } = require('./controllers/todo-controller.js');
 
 const {
@@ -44,13 +45,15 @@ app.post('/signup', signupUser);
 
 app.post('/login', loginUser);
 
+app.get('/users/:id', getUserInfo);
+
 app.post('/todo', createTodo);
 
 app.get('/todo/:id', getTodo);
 
-app.get('/users/:id', getUserInfo);
-
 app.put('/todo/:id', updateTodo);
+
+app.put("/favorite/:id", toggleFavorite)
 
 app.delete('/todo/:id', deleteTodo);
 

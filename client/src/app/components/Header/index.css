@@ -1,0 +1,17 @@
+.Header {
+  background: var(--blue);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.Header__container {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.Header__logo {
+  height: 40px;
+}

@@ -1,19 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import './index.css';
+import { Routes, Route } from 'react-router-dom';
+
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import AccountPage from './pages/AccountPage';
+import Layout from './components/Layout';
+import MainProvider from './context/MainProvider';
 
 function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    fetch('http://localhost:8000/message')
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message));
-  }, []);
-
   return (
-    <div className='App'>
-      <h1>{message}</h1>
-    </div>
+    <MainProvider>
+      <Layout>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/user' element={<AccountPage />} />
+          <Route path='*' element={<p>Your Lost! No Page Here!</p>} />
+        </Routes>
+      </Layout>
+    </MainProvider>
   );
 }
 

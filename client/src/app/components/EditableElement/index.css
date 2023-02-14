@@ -1,0 +1,13 @@
+.InlineEdit {
+  font-size: 25px;
+  font-weight: 500;
+  background-color: var(--light-blue);
+  padding: 10px;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+}
+
+.InlineEdit:hover {
+  background-color: var(--blue);
+}

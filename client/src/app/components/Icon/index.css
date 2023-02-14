@@ -1,0 +1,11 @@
+.Svg {
+  height: 32px;
+}
+
+.Svg--add {
+  position: absolute;
+  width: 100%;
+  height: 35px;
+  right: 0px;
+  top: 17px;
+}

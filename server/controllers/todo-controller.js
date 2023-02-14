@@ -1,13 +1,12 @@
 const Todo = require('../models/todo-model.js');
+const serverErrorHandler = '../utills/error.js';
 
 const createTodo = async (req, res) => {
-  const { userId, todo_name, is_favorite, status } = req.body;
+  const { userId, todo_name } = req.body;
 
   const newTodo = {
     user_id: userId,
     todo_name,
-    is_favorite,
-    status,
   };
 
   try {
@@ -15,9 +14,11 @@ const createTodo = async (req, res) => {
 
     await todo.save();
 
-    res.json({ message: 'Todo added' });
+    res.status(201).json({ message: 'To do task  added' });
   } catch (error) {
-    console.log(error);
+    serverErrorHandler(error, res, 500, {
+      message: 'Task not saved, try again later',
+    });
   }
 };
 
@@ -37,7 +38,9 @@ const getTodo = async (req, res) => {
       todo: userTodo,
     });
   } catch (error) {
-    console.log(error);
+    serverErrorHandler(error, res, 500, {
+      message: 'Unable to retrive to do tasks',
+    });
   }
 };
 
@@ -49,10 +52,25 @@ const updateTodo = async (req, res) => {
     await Todo.findByIdAndUpdate(todoId, newTodoData);
     const updatedTodo = await Todo.findById(todoId);
 
-    res.json(updatedTodo);
+    res.json({ message: 'Task updated', todo: updatedTodo });
   } catch (error) {
-    console.log(error);
+    serverErrorHandler(error, res, 500, {
+      message: 'Task is not updated, try again later',
+    });
   }
+};
+
+const toggleFavorite = async (req, res) => {
+  Todo.findById(req.params.id, function (_error, todo) {
+    todo.isFavorite = !todo.isFavorite;
+    todo.save(function (error, updatedTodo) {
+      if (error) {
+        console.log(error);
+      } else {
+        res.json({ message: 'Favorite toggled', todo: updatedTodo });
+      }
+    });
+  });
 };
 
 const deleteTodo = async (req, res) => {
@@ -61,10 +79,18 @@ const deleteTodo = async (req, res) => {
   try {
     await Todo.findByIdAndDelete(todoId);
 
-    res.json({ message: 'Post deleted' });
+    res.status(200).json({ message: 'Task deleted' });
   } catch (error) {
-    console.log(error);
+    serverErrorHandler(error, res, 500, {
+      message: 'Task is not deleted, try again later',
+    });
   }
 };
 
-module.exports = { createTodo, getTodo, updateTodo, deleteTodo };
+module.exports = {
+  createTodo,
+  getTodo,
+  updateTodo,
+  deleteTodo,
+  toggleFavorite,
+};
