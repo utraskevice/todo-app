@@ -2,6 +2,7 @@ import React from 'react';
 import './index.css';
 
 import plus from '../../images/plus.svg';
+import done from '../../images/done.svg';
 import bin from '../../images/bin.svg';
 import pencil from '../../images/pencil.svg';
 import blackStar from '../../images/star-black.svg';
@@ -11,6 +12,8 @@ const Icon = (props) => {
   switch (props.name) {
     case 'add':
       return <img src={plus} alt={plus} className='Svg--add' />;
+    case 'done':
+      return <img src={done} alt={done} className='Svg' />;
     case 'delete':
       return <img src={bin} alt={bin} className='Svg' />;
     case 'edit':

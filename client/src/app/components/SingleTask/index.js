@@ -1,6 +1,6 @@
 import Icon from '../Icon';
 import Button from '../Button';
-import InlineEdit from '../EditableElement';
+import Input from '../Input';
 
 import './index.css';
 import { useState } from 'react';
@@ -10,18 +10,41 @@ function SingleTask({
   todo_name,
   OnToggleFavorite,
   isfavorite,
-  toEdit,
   toDelete,
-  set,
+  setUpdate,
+  onChange,
+  value,
 }) {
-  const [value, setValue] = useState(todo_name);
+  const [isEdit, setIsEdit] = useState(false);
+
+  const handleToggle = () => {
+    setIsEdit(!isEdit);
+  };
+
   return (
     <li className='SingleTask' draggable={true} id={id} isfavorite={isfavorite}>
-      <InlineEdit value={value} setValue={setValue} />
+      {isEdit ? (
+        <Input
+          size='small'
+          type='text'
+          value={value}
+          placeholder={todo_name}
+          name='updateTodo'
+          onChange={onChange}
+        />
+      ) : (
+        <span>{todo_name}</span>
+      )}
       <div className='SingleTask__icons'>
-        <Button design='icons' onClick={toEdit}>
-          <Icon name='edit' />
-        </Button>
+        {isEdit ? (
+          <Button design='icons' onClick={setUpdate}>
+            <Icon name='done' />
+          </Button>
+        ) : (
+          <Button design='icons' onClick={handleToggle}>
+            <Icon name='edit' />
+          </Button>
+        )}
         <Button design='icons' onClick={toDelete}>
           <Icon name='delete' />
         </Button>

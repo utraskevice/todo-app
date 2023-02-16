@@ -18,6 +18,8 @@ function AccountPage() {
     deleteTodo,
     toggleFavorite,
     todo,
+    update,
+    setUpdate,
   } = useContext(ContentContext);
 
   const onSubmit = async (e) => {
@@ -50,7 +52,7 @@ function AccountPage() {
           {loading ? 'Loading...' : <Icon name='add' />}
         </Button>
       </form>
-      {error && <p className='Error'>{error}</p>}
+      {error && <p className='Error'>{Error}</p>}
       <div className='TodoBoard'>
         <div className='Todo'>
           <h1>To do</h1>
@@ -60,7 +62,8 @@ function AccountPage() {
               key={todo._id}
               status={todo.status}
               todo_name={todo.todo_name}
-              toEdit={(e) => updateTodo(e, todo._id)}
+              onChange={(e) => setUpdate(e.target.value)}
+              setUpdate={(e) => updateTodo(e, todo._id, update)}
               isfavorite={todo.isFavorite.toString()}
               OnToggleFavorite={(e) => toggleFavorite(e, todo._id)}
               toDelete={(e) => deleteTodo(e, todo._id)}

@@ -1,16 +1,22 @@
 .SingleTask {
+  font-size: 25px;
+  font-weight: 500;
   list-style: none;
   min-height: 55px;
   width: 90%;
-  background: #1e5f74;
-  color: #fcdab7;
+  background: var(--light-blue);
+  color: var(--light);
   border-radius: 5px;
   padding: 15px;
   margin: 20px auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 5px #2c5e8a;
+  box-shadow: 0 4px 5px var(--border-color);
   box-sizing: border-box;
   cursor: move;
+}
+
+.SingleTask:hover {
+  background-color: var(--border-color);
 }

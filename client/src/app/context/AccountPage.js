@@ -7,16 +7,22 @@ const ContentContext = React.createContext();
 function ContentProvider({ children }) {
   const { token } = useContext(AuthContext);
   const [todo, setTodo] = useState([]);
-  const [error, setError] = useState(null);
+  const [errorType, setErrorType] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [update, setUpdate] = useState(todo.todo_name);
+  const error = {
+    empty: 'Fields cannot be Empty',
+    loads: 'Failed to load',
+    request: 'Oops! Something expolded! 💥',
+  }[errorType];
 
   const createTodo = async (todo_name) => {
     const userId = localStorage.getItem('user');
     if (!todo_name) {
-      throw new Error('Fields cannot be Empty');
+      setErrorType('empty');
     } else {
       setLoading(true);
-      setError(null);
+      setErrorType(null);
       try {
         const response = await fetch(API.tasks, {
           method: 'POST',
@@ -25,14 +31,14 @@ function ContentProvider({ children }) {
         });
 
         if (response.status > 399 && response.status < 600) {
-          throw new Error('failed to load');
+          setErrorType(response.status === 400 ? 'loads' : 'request');
         } else {
           const data = await response.json();
           console.log(data);
           getTodo();
         }
       } catch (error) {
-        setError(true);
+        setErrorType('loads');
       } finally {
         setLoading(false);
       }
@@ -42,7 +48,7 @@ function ContentProvider({ children }) {
   const getTodo = useCallback(
     async (e) => {
       setLoading(true);
-      setError(null);
+      setErrorType(null);
 
       const userId = localStorage.getItem('user');
 
@@ -52,14 +58,14 @@ function ContentProvider({ children }) {
         });
 
         if (response.status > 399 && response.status < 600) {
-          throw new Error('failed to load');
+          setErrorType(response.status === 400 ? 'loads' : 'request');
         }
 
         const data = await response.json();
         console.log(data.todo);
         setTodo(data.todo);
       } catch (error) {
-        setError(true);
+        setErrorType('loads');
       } finally {
         setLoading(false);
       }
@@ -67,30 +73,25 @@ function ContentProvider({ children }) {
     [token]
   );
 
-  const updateTodo = async (e, id) => {
+  const updateTodo = async (e, id, todo_name) => {
     setLoading(true);
-    setError(null);
-
-    const updateData = {
-      user_name: e.target.update.value,
-    };
+    setErrorType(null);
     try {
       const response = await fetch(API.singleTask(id), {
         method: 'PUT',
         headers: { authorization: token, 'Content-Type': 'application/json' },
-        body: JSON.stringify(updateData),
-      });
-      setTodo(todo.filter(({ _id: i }) => id !== i));
+        body: JSON.stringify({ todo_name }),
+      }).then();
 
       if (response.status > 399 && response.status < 600) {
-        throw new Error('Failed to update');
+        setErrorType(response.status === 400 ? 'loads' : 'request');
       } else {
         const data = await response.json();
         console.log(data);
         getTodo();
       }
     } catch (error) {
-      setError(true);
+      setErrorType('loads');
     } finally {
       setLoading(false);
     }
@@ -98,7 +99,7 @@ function ContentProvider({ children }) {
 
   const toggleFavorite = async (e, id) => {
     setLoading(true);
-    setError(null);
+    setErrorType(null);
 
     try {
       const response = await fetch(API.toggleFavorite(id), {
@@ -107,14 +108,14 @@ function ContentProvider({ children }) {
       });
 
       if (response.status > 399 && response.status < 600) {
-        throw new Error('Failed to update');
+        setErrorType(response.status === 400 ? 'loads' : 'request');
       } else {
         const data = await response.json();
         console.log(data);
         getTodo();
       }
     } catch (error) {
-      setError(true);
+      setErrorType('loads');
     } finally {
       setLoading(false);
     }
@@ -130,13 +131,13 @@ function ContentProvider({ children }) {
       console.log(response);
 
       if (response.status > 399 && response.status < 600) {
-        throw new Error('Failed to update');
+        setErrorType(response.status === 400 ? 'loads' : 'request');
       } else {
         const data = await response.json();
         console.log(data);
       }
     } catch (error) {
-      setError(true);
+      setErrorType('loads');
     }
   };
 
@@ -149,8 +150,11 @@ function ContentProvider({ children }) {
         toggleFavorite,
         deleteTodo,
         todo,
+        setTodo,
         loading,
         error,
+        update,
+        setUpdate,
       }}
     >
       {children}

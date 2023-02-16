@@ -12,6 +12,7 @@ function Button({
   to,
   disabled,
   position,
+  onSubmit,
 }) {
   const Component = to ? Link : 'button';
   const buttonType = to ? null : type;
@@ -26,6 +27,7 @@ function Button({
       disabled={disabled}
       to={to}
       onClick={onClick}
+      onSubmit={onSubmit}
       type={buttonType}
       className={className}
     >
